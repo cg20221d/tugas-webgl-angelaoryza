@@ -83,6 +83,95 @@ function main() {
     gl.drawArrays(gl.LINE_LOOP, 0, 14); 
     //          jenis      data     count
 
+    var vertices3D1 = [ 
+        -0.75, 0.75, //A : Kanan atas
+        -0.72, 0.79,
+
+        -0.72, 0.79,
+        -0.12, 0.79,
+
+        -0.15, 0.75,
+        -0.12, 0.79,
+
+        -0.12, 0.79,
+        -0.12, 0.54,
+
+        -0.15, 0.50,
+        -0.12, 0.54,
+
+        -0.20, 0.54,
+        -0.69, 0.54,
+
+        -0.69, 0.54,
+        -0.72, 0.50,
+
+        -0.70, 0.29,
+        -0.21, 0.29,
+
+        -0.21, 0.29,
+        -0.18, 0.25
+//B : Bawah Tengah
+    ];
+
+    
+    
+    //buat array untuk segitiga, tapi ini masih di cpu
+
+    var buffer = gl.createBuffer(); 
+    gl.bindBuffer(gl.ARRAY_BUFFER, buffer); // ini define alamat gpu
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices3D1), gl.STATIC_DRAW);
+    //udah tersambung ke gpu (udah dipindah ke alam GPU)
+
+    //Vertex Shaders
+    var vertexShaderCode3D1 = 
+    `
+        attribute vec2 ThreeD1Position;
+        void main() {
+            float x = ThreeD1Position.x;
+            float y = ThreeD1Position.y;
+            gl_PointSize = 10.0;
+            gl_Position = vec4(x, y, 0.0, 1.0);
+            
+        }
+        `;
+
+    var vertexShaderObject3D1 = gl.createShader(gl.VERTEX_SHADER);
+    gl.shaderSource(vertexShaderObject3D1, vertexShaderCode3D1);
+    gl.compileShader(vertexShaderObject3D1); // sampai sini udah jadi .o
+    //Fragment Shaders
+    var fragmentShaderCode3D1 = `
+        void main() {
+            precision mediump float;
+            float r = 1.0;
+            float g = 0.0;
+            float b = 1.0;
+            float a = 1.0;
+            gl_FragColor = vec4(r, g, b, a);
+        }
+        `;
+
+    var fragmentShaderObject3D1 = gl.createShader(gl.FRAGMENT_SHADER);
+    gl.shaderSource(fragmentShaderObject3D1, fragmentShaderCode3D1);
+    gl.compileShader(fragmentShaderObject3D1); // sampai sini udah jadi .o
+
+    var shaderProgram3D1 = gl.createProgram(); //membuat sebuah mangkok
+    gl.attachShader(shaderProgram3D1, vertexShaderObject3D1); //semua object file tadi ditaruh ke mangkok yang sama
+    gl.attachShader(shaderProgram3D1, fragmentShaderObject3D1);
+    gl.linkProgram(shaderProgram3D1); 
+    gl.useProgram(shaderProgram3D1);
+
+    //Mengajari GPU bagaimana caranya mengoleksi
+    // nilai posisi dari ARRAY_BUFFER
+    //untuk setiap verteks yang sedang diproses
+
+    var ThreeD1Position = gl.getAttribLocation(shaderProgram3D1, "ThreeD1Position");
+    gl.vertexAttribPointer(ThreeD1Position, 2, gl.FLOAT, false, 0, 0);
+    //                      index   dimensi              warna
+    gl.enableVertexAttribArray(ThreeD1Position);
+
+    gl.drawArrays(gl.LINES, 0, 18); 
+    //          jenis      data     count
+
 //-----------------------ANGKA KEDUA-----------------------------//
 
     var vertices2 = [ 
