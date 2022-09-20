@@ -357,9 +357,9 @@ function main() {
     var fragmentShaderCode3 = `
         void main() {
             precision mediump float;
-            float r = 0.0;
+            float r = 5.0;
             float g = 1.0;
-            float b = 5.0;
+            float b = 0.0;
             float a = 10.0;
             gl_FragColor = vec4(r, g, b, a);
         }
@@ -476,9 +476,9 @@ gl.compileShader(vertexShaderObject5); // sampai sini udah jadi .o
 var fragmentShaderCode5 = `
     void main() {
         precision mediump float;
-        float r = 0.0;
+        float r = 5.0;
         float g = 1.0;
-        float b = 5.0;
+        float b = 0.0;
         float a = 10.0;
         gl_FragColor = vec4(r, g, b, a);
     }
@@ -531,9 +531,9 @@ gl.compileShader(vertexShaderObject6); // sampai sini udah jadi .o
 var fragmentShaderCode6 = `
     void main() {
         precision mediump float;
-        float r = 0.0;
+        float r = 5.0;
         float g = 1.0;
-        float b = 5.0;
+        float b = 0.0;
         float a = 10.0;
         gl_FragColor = vec4(r, g, b, a);
     }
@@ -586,9 +586,9 @@ gl.compileShader(vertexShaderObject7); // sampai sini udah jadi .o
 var fragmentShaderCode7 = `
     void main() {
         precision mediump float;
-        float r = 0.0;
+        float r = 5.0;
         float g = 1.0;
-        float b = 5.0;
+        float b = 0.0;
         float a = 10.0;
         gl_FragColor = vec4(r, g, b, a);
     }
@@ -608,7 +608,411 @@ var gPosition = gl.getAttribLocation(shaderProgram7, "gPosition");
 gl.vertexAttribPointer(gPosition, 2, gl.FLOAT, false, 0, 0);
 gl.enableVertexAttribArray(gPosition);
 gl.drawArrays(gl.TRIANGLE_FAN, 0, 4); 
+
+var bayangan1 = [ 
+    -0.75, -0.20, 
+    -0.72, -0.16,
+    -0.67, -0.16,
+    -0.70, -0.20,
+];
+
+var buffer = gl.createBuffer(); 
+gl.bindBuffer(gl.ARRAY_BUFFER, buffer); // ini define alamat gpu
+gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(bayangan1), gl.STATIC_DRAW);
+//udah tersambung ke gpu (udah dipindah ke alam GPU)
+
+//Vertex Shaders
+var vertexShaderCodebayangan1 = 
+`
+    attribute vec2 hPosition;
+    void main() {
+        float x = hPosition.x;
+        float y = hPosition.y;
+        gl_PointSize = 5.0;
+        gl_Position = vec4(x, y, 0.0, 1.0);
+        
+    }
+    `;
+
+var vertexShaderObjectbayangan1 = gl.createShader(gl.VERTEX_SHADER);
+gl.shaderSource(vertexShaderObjectbayangan1, vertexShaderCodebayangan1);
+gl.compileShader(vertexShaderObjectbayangan1); // sampai sini udah jadi .o
+//Fragment Shaders
+var fragmentShaderCodebayangan1 = `
+    void main() {
+        precision mediump float;
+        float r = 1.0;
+        float g = 0.0;
+        float b = 1.0;
+        float a = 10.0;
+        gl_FragColor = vec4(r, g, b, a);
+    }
+    `;
+
+var fragmentShaderObjectbayangan1 = gl.createShader(gl.FRAGMENT_SHADER);
+gl.shaderSource(fragmentShaderObjectbayangan1, fragmentShaderCodebayangan1);
+gl.compileShader(fragmentShaderObjectbayangan1); // sampai sini udah jadi .o
+
+var shaderProgrambayangan1 = gl.createProgram(); //membuat sebuah mangkok
+gl.attachShader(shaderProgrambayangan1, vertexShaderObjectbayangan1); //semua object file tadi ditaruh ke mangkok yang sama
+gl.attachShader(shaderProgrambayangan1, fragmentShaderObjectbayangan1);
+gl.linkProgram(shaderProgrambayangan1); 
+gl.useProgram(shaderProgrambayangan1);
+
+var hPosition = gl.getAttribLocation(shaderProgrambayangan1, "hPosition");
+gl.vertexAttribPointer(hPosition, 2, gl.FLOAT, false, 0, 0);
+gl.enableVertexAttribArray(hPosition);
+gl.drawArrays(gl.TRIANGLE_FAN, 0, 4); 
+
+var bayangan2 = [ 
+    -0.70, -0.20,
+    -0.67, -0.16,
+    -0.585, -0.63,
+    -0.60, -0.70
+];
+
+var buffer = gl.createBuffer(); 
+gl.bindBuffer(gl.ARRAY_BUFFER, buffer); // ini define alamat gpu
+gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(bayangan2), gl.STATIC_DRAW);
+//udah tersambung ke gpu (udah dipindah ke alam GPU)
+
+//Vertex Shaders
+var vertexShaderCodebayangan2 = 
+`
+    attribute vec2 iPosition;
+    void main() {
+        float x = iPosition.x;
+        float y = iPosition.y;
+        gl_PointSize = 5.0;
+        gl_Position = vec4(x, y, 0.0, 1.0);
+        
+    }
+    `;
+
+var vertexShaderObjectbayangan2 = gl.createShader(gl.VERTEX_SHADER);
+gl.shaderSource(vertexShaderObjectbayangan2, vertexShaderCodebayangan2);
+gl.compileShader(vertexShaderObjectbayangan2); // sampai sini udah jadi .o
+//Fragment Shaders
+var fragmentShaderCodebayangan2 = `
+    void main() {
+        precision mediump float;
+        float r = 1.0;
+        float g = 0.0;
+        float b = 1.0;
+        float a = 10.0;
+        gl_FragColor = vec4(r, g, b, a);
+    }
+    `;
+
+var fragmentShaderObjectbayangan2 = gl.createShader(gl.FRAGMENT_SHADER);
+gl.shaderSource(fragmentShaderObjectbayangan2, fragmentShaderCodebayangan2);
+gl.compileShader(fragmentShaderObjectbayangan2); // sampai sini udah jadi .o
+
+var shaderProgrambayangan2 = gl.createProgram(); //membuat sebuah mangkok
+gl.attachShader(shaderProgrambayangan2, vertexShaderObjectbayangan2); //semua object file tadi ditaruh ke mangkok yang sama
+gl.attachShader(shaderProgrambayangan2, fragmentShaderObjectbayangan2);
+gl.linkProgram(shaderProgrambayangan2); 
+gl.useProgram(shaderProgrambayangan2);
+
+var iPosition = gl.getAttribLocation(shaderProgrambayangan2, "iPosition");
+gl.vertexAttribPointer(iPosition, 2, gl.FLOAT, false, 0, 0);
+gl.enableVertexAttribArray(iPosition);
+gl.drawArrays(gl.TRIANGLE_FAN, 0, 4);
+
+var bayangan3 = [ 
+    -0.50, -0.28,
+    -0.47, -0.24,
+    -0.42, -0.24,
+    -0.45, -0.28
+];
+
+var buffer = gl.createBuffer(); 
+gl.bindBuffer(gl.ARRAY_BUFFER, buffer); // ini define alamat gpu
+gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(bayangan3), gl.STATIC_DRAW);
+//udah tersambung ke gpu (udah dipindah ke alam GPU)
+
+//Vertex Shaders
+var vertexShaderCodebayangan3 = 
+`
+    attribute vec2 jPosition;
+    void main() {
+        float x = jPosition.x;
+        float y = jPosition.y;
+        gl_PointSize = 5.0;
+        gl_Position = vec4(x, y, 0.0, 1.0);
+        
+    }
+    `;
+
+var vertexShaderObjectbayangan3 = gl.createShader(gl.VERTEX_SHADER);
+gl.shaderSource(vertexShaderObjectbayangan3, vertexShaderCodebayangan3);
+gl.compileShader(vertexShaderObjectbayangan3); // sampai sini udah jadi .o
+//Fragment Shaders
+var fragmentShaderCodebayangan3 = `
+    void main() {
+        precision mediump float;
+        float r = 1.0;
+        float g = 0.0;
+        float b = 1.0;
+        float a = 10.0;
+        gl_FragColor = vec4(r, g, b, a);
+    }
+    `;
+
+var fragmentShaderObjectbayangan3 = gl.createShader(gl.FRAGMENT_SHADER);
+gl.shaderSource(fragmentShaderObjectbayangan3, fragmentShaderCodebayangan3);
+gl.compileShader(fragmentShaderObjectbayangan3); // sampai sini udah jadi .o
+
+var shaderProgrambayangan3 = gl.createProgram(); //membuat sebuah mangkok
+gl.attachShader(shaderProgrambayangan3, vertexShaderObjectbayangan3); //semua object file tadi ditaruh ke mangkok yang sama
+gl.attachShader(shaderProgrambayangan3, fragmentShaderObjectbayangan3);
+gl.linkProgram(shaderProgrambayangan3); 
+gl.useProgram(shaderProgrambayangan3);
+
+var jPosition = gl.getAttribLocation(shaderProgrambayangan3, "jPosition");
+gl.vertexAttribPointer(jPosition, 2, gl.FLOAT, false, 0, 0);
+gl.enableVertexAttribArray(jPosition);
+gl.drawArrays(gl.TRIANGLE_FAN, 0, 4);
+
+var bayangan4 = [ 
+    -0.42, -0.24,
+    -0.45, -0.28,
+    -0.35, -0.70,
+    -0.3325, -0.63,
+];
+
+var buffer = gl.createBuffer(); 
+gl.bindBuffer(gl.ARRAY_BUFFER, buffer); // ini define alamat gpu
+gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(bayangan4), gl.STATIC_DRAW);
+//udah tersambung ke gpu (udah dipindah ke alam GPU)
+
+//Vertex Shaders
+var vertexShaderCodebayangan4 = 
+`
+    attribute vec2 kPosition;
+    void main() {
+        float x = kPosition.x;
+        float y = kPosition.y;
+        gl_PointSize = 5.0;
+        gl_Position = vec4(x, y, 0.0, 1.0);
+        
+    }
+    `;
+
+var vertexShaderObjectbayangan4 = gl.createShader(gl.VERTEX_SHADER);
+gl.shaderSource(vertexShaderObjectbayangan4, vertexShaderCodebayangan4);
+gl.compileShader(vertexShaderObjectbayangan4); // sampai sini udah jadi .o
+//Fragment Shaders
+var fragmentShaderCodebayangan4 = `
+    void main() {
+        precision mediump float;
+        float r = 1.0;
+        float g = 0.0;
+        float b = 1.0;
+        float a = 10.0;
+        gl_FragColor = vec4(r, g, b, a);
+    }
+    `;
+
+var fragmentShaderObjectbayangan4 = gl.createShader(gl.FRAGMENT_SHADER);
+gl.shaderSource(fragmentShaderObjectbayangan4, fragmentShaderCodebayangan4);
+gl.compileShader(fragmentShaderObjectbayangan4); // sampai sini udah jadi .o
+
+var shaderProgrambayangan4 = gl.createProgram(); //membuat sebuah mangkok
+gl.attachShader(shaderProgrambayangan4, vertexShaderObjectbayangan4); //semua object file tadi ditaruh ke mangkok yang sama
+gl.attachShader(shaderProgrambayangan4, fragmentShaderObjectbayangan4);
+gl.linkProgram(shaderProgrambayangan4); 
+gl.useProgram(shaderProgrambayangan4);
+
+var kPosition = gl.getAttribLocation(shaderProgrambayangan4, "kPosition");
+gl.vertexAttribPointer(kPosition, 2, gl.FLOAT, false, 0, 0);
+gl.enableVertexAttribArray(kPosition);
+gl.drawArrays(gl.TRIANGLE_FAN, 0, 4);
+
+var bayangan5 = [ 
+    -0.55, -0.75,
+    -0.51, -0.75,
+    -0.455, -0.49,
+    -0.475, -0.40,
+];
+
+var buffer = gl.createBuffer(); 
+gl.bindBuffer(gl.ARRAY_BUFFER, buffer); // ini define alamat gpu
+gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(bayangan5), gl.STATIC_DRAW);
+//udah tersambung ke gpu (udah dipindah ke alam GPU)
+
+//Vertex Shaders
+var vertexShaderCodebayangan5 = 
+`
+    attribute vec2 lPosition;
+    void main() {
+        float x = lPosition.x;
+        float y = lPosition.y;
+        gl_PointSize = 5.0;
+        gl_Position = vec4(x, y, 0.0, 1.0);
+        
+    }
+    `;
+
+var vertexShaderObjectbayangan5 = gl.createShader(gl.VERTEX_SHADER);
+gl.shaderSource(vertexShaderObjectbayangan5, vertexShaderCodebayangan5);
+gl.compileShader(vertexShaderObjectbayangan5); // sampai sini udah jadi .o
+//Fragment Shaders
+var fragmentShaderCodebayangan5 = `
+    void main() {
+        precision mediump float;
+        float r = 1.0;
+        float g = 0.0;
+        float b = 1.0;
+        float a = 10.0;
+        gl_FragColor = vec4(r, g, b, a);
+    }
+    `;
+
+var fragmentShaderObjectbayangan5 = gl.createShader(gl.FRAGMENT_SHADER);
+gl.shaderSource(fragmentShaderObjectbayangan5, fragmentShaderCodebayangan5);
+gl.compileShader(fragmentShaderObjectbayangan5); // sampai sini udah jadi .o
+
+var shaderProgrambayangan5 = gl.createProgram(); //membuat sebuah mangkok
+gl.attachShader(shaderProgrambayangan5, vertexShaderObjectbayangan5); //semua object file tadi ditaruh ke mangkok yang sama
+gl.attachShader(shaderProgrambayangan5, fragmentShaderObjectbayangan5);
+gl.linkProgram(shaderProgrambayangan5); 
+gl.useProgram(shaderProgrambayangan5);
+
+var lPosition = gl.getAttribLocation(shaderProgrambayangan5, "lPosition");
+gl.vertexAttribPointer(lPosition, 2, gl.FLOAT, false, 0, 0);
+gl.enableVertexAttribArray(lPosition);
+gl.drawArrays(gl.TRIANGLE_FAN, 0, 4);
+
+var bayangan6 = [ 
+    -0.25, -0.20,
+    -0.22, -0.16,
+    -0.17, -0.16,
+    -0.20, -0.20,
+];
+
+var buffer = gl.createBuffer(); 
+gl.bindBuffer(gl.ARRAY_BUFFER, buffer); // ini define alamat gpu
+gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(bayangan6), gl.STATIC_DRAW);
+//udah tersambung ke gpu (udah dipindah ke alam GPU)
+
+//Vertex Shaders
+var vertexShaderCodebayangan6 = 
+`
+    attribute vec2 mPosition;
+    void main() {
+        float x = mPosition.x;
+        float y = mPosition.y;
+        gl_PointSize = 5.0;
+        gl_Position = vec4(x, y, 0.0, 1.0);
+        
+    }
+    `;
+
+var vertexShaderObjectbayangan6 = gl.createShader(gl.VERTEX_SHADER);
+gl.shaderSource(vertexShaderObjectbayangan6, vertexShaderCodebayangan6);
+gl.compileShader(vertexShaderObjectbayangan6); // sampai sini udah jadi .o
+//Fragment Shaders
+var fragmentShaderCodebayangan6 = `
+    void main() {
+        precision mediump float;
+        float r = 1.0;
+        float g = 0.0;
+        float b = 1.0;
+        float a = 10.0;
+        gl_FragColor = vec4(r, g, b, a);
+    }
+    `;
+
+var fragmentShaderObjectbayangan6 = gl.createShader(gl.FRAGMENT_SHADER);
+gl.shaderSource(fragmentShaderObjectbayangan6, fragmentShaderCodebayangan6);
+gl.compileShader(fragmentShaderObjectbayangan6); // sampai sini udah jadi .o
+
+var shaderProgrambayangan6 = gl.createProgram(); //membuat sebuah mangkok
+gl.attachShader(shaderProgrambayangan6, vertexShaderObjectbayangan6); //semua object file tadi ditaruh ke mangkok yang sama
+gl.attachShader(shaderProgrambayangan6, fragmentShaderObjectbayangan6);
+gl.linkProgram(shaderProgrambayangan6); 
+gl.useProgram(shaderProgrambayangan6);
+
+var mPosition = gl.getAttribLocation(shaderProgrambayangan6, "mPosition");
+gl.vertexAttribPointer(mPosition, 2, gl.FLOAT, false, 0, 0);
+gl.enableVertexAttribArray(mPosition);
+gl.drawArrays(gl.TRIANGLE_FAN, 0, 4);
+
+var bayangan7 = [ 
+    -0.17, -0.16,
+    -0.20, -0.20,
+    -0.30, -0.75,
+    -0.27, -0.71
+];
+
+var buffer = gl.createBuffer(); 
+gl.bindBuffer(gl.ARRAY_BUFFER, buffer); // ini define alamat gpu
+gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(bayangan7), gl.STATIC_DRAW);
+//udah tersambung ke gpu (udah dipindah ke alam GPU)
+
+//Vertex Shaders
+var vertexShaderCodebayangan7 = 
+`
+    attribute vec2 nPosition;
+    void main() {
+        float x = nPosition.x;
+        float y = nPosition.y;
+        gl_PointSize = 5.0;
+        gl_Position = vec4(x, y, 0.0, 1.0);
+        
+    }
+    `;
+
+var vertexShaderObjectbayangan7 = gl.createShader(gl.VERTEX_SHADER);
+gl.shaderSource(vertexShaderObjectbayangan7, vertexShaderCodebayangan7);
+gl.compileShader(vertexShaderObjectbayangan7); // sampai sini udah jadi .o
+//Fragment Shaders
+var fragmentShaderCodebayangan7 = `
+    void main() {
+        precision mediump float;
+        float r = 1.0;
+        float g = 0.0;
+        float b = 1.0;
+        float a = 10.0;
+        gl_FragColor = vec4(r, g, b, a);
+    }
+    `;
+
+var fragmentShaderObjectbayangan7 = gl.createShader(gl.FRAGMENT_SHADER);
+gl.shaderSource(fragmentShaderObjectbayangan7, fragmentShaderCodebayangan7);
+gl.compileShader(fragmentShaderObjectbayangan7); // sampai sini udah jadi .o
+
+var shaderProgrambayangan7 = gl.createProgram(); //membuat sebuah mangkok
+gl.attachShader(shaderProgrambayangan7, vertexShaderObjectbayangan7); //semua object file tadi ditaruh ke mangkok yang sama
+gl.attachShader(shaderProgrambayangan7, fragmentShaderObjectbayangan7);
+gl.linkProgram(shaderProgrambayangan7); 
+gl.useProgram(shaderProgrambayangan7);
+
+var nPosition = gl.getAttribLocation(shaderProgrambayangan7, "nPosition");
+gl.vertexAttribPointer(nPosition, 2, gl.FLOAT, false, 0, 0);
+gl.enableVertexAttribArray(nPosition);
+gl.drawArrays(gl.TRIANGLE_FAN, 0, 4);
+
 }
+
+
+// -0.75, -0.20, //A : Kanan atas
+// -0.70, -0.20,
+// -0.60, -0.70,
+// -0.50, -0.28,
+// -0.45, -0.28,
+// -0.35, -0.70,
+// -0.25, -0.20,
+// -0.20, -0.20,
+// 
+// -0.40, -0.75,
+// -0.475, -0.40,
+// -0.55, -0.75,
+// -0.65, -0.75
+
+
+
 
 window.onload = main;
 
