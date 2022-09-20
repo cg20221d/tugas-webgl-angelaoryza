@@ -994,6 +994,141 @@ gl.vertexAttribPointer(nPosition, 2, gl.FLOAT, false, 0, 0);
 gl.enableVertexAttribArray(nPosition);
 gl.drawArrays(gl.TRIANGLE_FAN, 0, 4);
 
+
+//----------------------------HURUF O------------------------//
+var hurufO = [];
+for (var i=0.0; i<=360; i++) {
+    var j = (i * Math.PI) / 180 ;
+
+    var vert1 = [
+      -0.27 * Math.sin(j) + 0.45,
+      -0.31 * Math.cos(j) - 0.46,  
+    ];
+
+    var vert2 = [
+        0.45,
+        -0.45
+    ];
+
+    hurufO = hurufO.concat(vert1);
+    hurufO = hurufO.concat(vert2);
+}
+var n = hurufO.length / 2;
+
+var buffer = gl.createBuffer(); 
+gl.bindBuffer(gl.ARRAY_BUFFER, buffer); // ini define alamat gpu
+gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(hurufO), gl.STATIC_DRAW);
+//udah tersambung ke gpu (udah dipindah ke alam GPU)
+
+//Vertex Shaders
+var vertexShaderCodeHurufO = 
+`
+    attribute vec2 oPosition;
+    void main() {
+        float x = oPosition.x;
+        float y = oPosition.y;
+        gl_PointSize = 5.0;
+        gl_Position = vec4(x, y, 0.0, 1.0);
+        
+    }
+    `;
+
+var vertexShaderObjectHurufO = gl.createShader(gl.VERTEX_SHADER);
+gl.shaderSource(vertexShaderObjectHurufO, vertexShaderCodeHurufO);
+gl.compileShader(vertexShaderObjectHurufO); // sampai sini udah jadi .o
+//Fragment Shaders
+var fragmentShaderCodebayanganHurufO = `
+    void main() {
+        precision mediump float;
+        float r = 5.0;
+        float g = 1.0;
+        float b = 0.0;
+        float a = 10.0;
+        gl_FragColor = vec4(r, g, b, a);
+    }
+    `;
+
+var fragmentShaderObjectHurufO = gl.createShader(gl.FRAGMENT_SHADER);
+gl.shaderSource(fragmentShaderObjectHurufO, fragmentShaderCodebayanganHurufO);
+gl.compileShader(fragmentShaderObjectHurufO); // sampai sini udah jadi .o
+
+var shaderProgramHurufO = gl.createProgram(); //membuat sebuah mangkok
+gl.attachShader(shaderProgramHurufO, vertexShaderObjectHurufO); //semua object file tadi ditaruh ke mangkok yang sama
+gl.attachShader(shaderProgramHurufO, fragmentShaderObjectHurufO);
+gl.linkProgram(shaderProgramHurufO); 
+gl.useProgram(shaderProgramHurufO);
+
+var oPosition = gl.getAttribLocation(shaderProgramHurufO, "oPosition");
+gl.vertexAttribPointer(oPosition, 2, gl.FLOAT, false, 0, 0);
+gl.enableVertexAttribArray(oPosition);
+gl.drawArrays(gl.TRIANGLE_STRIP, 0, n);
+
+var hurufO2 = [];
+for (var i=0.0; i<=360; i++) {
+    var j = (i * Math.PI) / 180 ;
+
+    var vert12 = [
+      -0.22 * Math.sin(j) + 0.45,
+      -0.26 * Math.cos(j) - 0.46,  
+    ];
+
+    var vert22 = [
+        0.45,
+        -0.45
+    ];
+
+    hurufO2 = hurufO2.concat(vert12);
+    hurufO2 = hurufO2.concat(vert22);
+}
+var p = hurufO2.length / 2;
+
+var buffer = gl.createBuffer(); 
+gl.bindBuffer(gl.ARRAY_BUFFER, buffer); // ini define alamat gpu
+gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(hurufO2), gl.STATIC_DRAW);
+//udah tersambung ke gpu (udah dipindah ke alam GPU)
+
+//Vertex Shaders
+var vertexShaderCodeHurufO2 = 
+`
+    attribute vec2 pPosition;
+    void main() {
+        float x = pPosition.x;
+        float y = pPosition.y;
+        gl_PointSize = 5.0;
+        gl_Position = vec4(x, y, 0.0, 1.0);
+        
+    }
+    `;
+
+var vertexShaderObjectHurufO2 = gl.createShader(gl.VERTEX_SHADER);
+gl.shaderSource(vertexShaderObjectHurufO2, vertexShaderCodeHurufO2);
+gl.compileShader(vertexShaderObjectHurufO2); // sampai sini udah jadi .o
+//Fragment Shaders
+var fragmentShaderCodebayanganHurufO2 = `
+    void main() {
+        precision mediump float;
+        float r = 1.0;
+        float g = 0.0;
+        float b = 1.0;
+        float a = 10.0;
+        gl_FragColor = vec4(r, g, b, a);
+    }
+    `;
+
+var fragmentShaderObjectHurufO2 = gl.createShader(gl.FRAGMENT_SHADER);
+gl.shaderSource(fragmentShaderObjectHurufO2, fragmentShaderCodebayanganHurufO2);
+gl.compileShader(fragmentShaderObjectHurufO2); // sampai sini udah jadi .o
+
+var shaderProgramHurufO2 = gl.createProgram(); //membuat sebuah mangkok
+gl.attachShader(shaderProgramHurufO2, vertexShaderObjectHurufO2); //semua object file tadi ditaruh ke mangkok yang sama
+gl.attachShader(shaderProgramHurufO2, fragmentShaderObjectHurufO2);
+gl.linkProgram(shaderProgramHurufO2); 
+gl.useProgram(shaderProgramHurufO2);
+
+var pPosition = gl.getAttribLocation(shaderProgramHurufO2, "pPosition");
+gl.vertexAttribPointer(pPosition, 2, gl.FLOAT, false, 0, 0);
+gl.enableVertexAttribArray(pPosition);
+gl.drawArrays(gl.TRIANGLE_STRIP, 0, p);
 }
 
 
