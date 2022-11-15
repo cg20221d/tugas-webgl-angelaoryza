@@ -3,7 +3,7 @@ function main() {
     var gl = kanvas.getContext("webgl");
 
     var vertices = [ 
-        -0.75, 0.75, -1.0,//A : Kanan atas
+        -0.75, 0.75, -1.0,  //A : Kanan atas
         -0.15, 0.75, -1.0,
         -0.15, 0.50, -1.0,
         -0.18, 0.45, -1.0,
