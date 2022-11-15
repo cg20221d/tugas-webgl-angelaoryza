@@ -3,20 +3,20 @@ function main() {
     var gl = kanvas.getContext("webgl");
 
     var vertices = [ 
-        -0.75, 0.75, //A : Kanan atas
-        -0.15, 0.75,
-        -0.15, 0.50,
-        -0.18, 0.45,
-        -0.70, 0.45,
-        -0.70, 0.25,
-        -0.18, 0.25,
-        -0.15, 0.20,
-        -0.75, 0.20,
-        -0.75, 0.45,
-        -0.72, 0.50,
-        -0.20, 0.50,
-        -0.20, 0.70,
-        -0.72, 0.70
+        -0.75, 0.75, -1.0,//A : Kanan atas
+        -0.15, 0.75, -1.0,
+        -0.15, 0.50, -1.0,
+        -0.18, 0.45, -1.0,
+        -0.70, 0.45, -1.0,
+        -0.70, 0.25, -1.0,
+        -0.18, 0.25, -1.0,
+        -0.15, 0.20, -1.0,
+        -0.75, 0.20, -1.0,
+        -0.75, 0.45, -1.0,
+        -0.72, 0.50, -1.0,
+        -0.20, 0.50, -1.0,
+        -0.20, 0.70, -1.0,
+        -0.72, 0.70, -1.0,
 //B : Bawah Tengah
     ];
 
@@ -32,12 +32,25 @@ function main() {
     //Vertex Shaders
     var vertexShaderCode = 
     `
-        attribute vec2 aPosition;
+        attribute vec3 aPosition;
         void main() {
             float x = aPosition.x;
             float y = aPosition.y;
+            float z = aPosition.z;
             gl_PointSize = 10.0;
-            gl_Position = vec4(x, y, 0.0, 1.0);
+            mat4 projectionMatrix = mat4(-0.7247, 0.0, 0.0, 0.0,
+                0.0, -0.7247, 0.0, 0.0,
+                0.0, 0.0, 1.22, -1,
+                0.0, 0.0, 1.11, 0.0);
+            mat4 viewMatrix = mat4(7.5, 0.0, 0.0, 0.0,
+                0.0, 7.5, 0.0, 0.0,
+                0.0, 0.0, 7.5, 0.0,
+                0.0, 0.0, 0.0, 7.5);
+            mat4 translation = mat4(1.0, 0.0, 0.0, 0.0,
+                                   0.0, 1.0, 0.0, 0.0,
+                                   0.0, 0.0, 1.0, 0.0,
+                                   x,  y, 0.0,  1.0);
+            gl_Position = projectionMatrix * viewMatrix * translation * vec4(x, y, z, 1.0);
             
         }
         `;
@@ -64,6 +77,7 @@ function main() {
     var shaderProgram = gl.createProgram(); //membuat sebuah mangkok
     gl.attachShader(shaderProgram, vertexShaderObject); //semua object file tadi ditaruh ke mangkok yang sama
     gl.attachShader(shaderProgram, fragmentShaderObject);
+    
     gl.linkProgram(shaderProgram); 
     gl.useProgram(shaderProgram);
 
@@ -72,7 +86,7 @@ function main() {
     //untuk setiap verteks yang sedang diproses
 
     var aPosition = gl.getAttribLocation(shaderProgram, "aPosition");
-    gl.vertexAttribPointer(aPosition, 2, gl.FLOAT, false, 0, 0);
+    gl.vertexAttribPointer(aPosition, 3, gl.FLOAT, false, 0, 0);
     //                      index   dimensi              warna
     gl.enableVertexAttribArray(aPosition);
 
@@ -80,39 +94,44 @@ function main() {
     //            Red   Green   Blue    Alpha(Opacity)
     gl.clear(gl.COLOR_BUFFER_BIT);
 
+    // var aspect = gl.canvas.clientWidth / gl.canvas.clientHeight;
+    // var zNear = 0.5;
+    // var zFar = 50.0;
+    // var projectionMatrix = m4.perspective(75, aspect, zNear, zFar);
+
     gl.drawArrays(gl.LINE_LOOP, 0, 14); 
     //          jenis      data     count
 
     var vertices3D1 = [ 
-        -0.75, 0.75, //A : Kanan atas
-        -0.72, 0.79,
+        -0.75, 0.75, -1.0, //A : Kanan atas
+        -0.72, 0.79, -1.0,
 
-        -0.72, 0.79,
-        -0.12, 0.79,
+        -0.72, 0.79, -1.0,
+        -0.12, 0.79, -1.0,
 
-        -0.15, 0.75,
-        -0.12, 0.79,
+        -0.15, 0.75, -1.0,
+        -0.12, 0.79, -1.0,
 
-        -0.12, 0.79,
-        -0.12, 0.54,
+        -0.12, 0.79, -1.0,
+        -0.12, 0.54, -1.0,
 
-        -0.15, 0.50,
-        -0.12, 0.54,
+        -0.15, 0.50, -1.0,
+        -0.12, 0.54, -1.0,
 
-        -0.20, 0.54,
-        -0.69, 0.54,
+        -0.20, 0.54, -1.0,
+        -0.69, 0.54, -1.0,
 
-        -0.69, 0.54,
-        -0.72, 0.50,
+        -0.69, 0.54, -1.0,
+        -0.72, 0.50, -1.0,
 
-        -0.70, 0.29,
-        -0.15, 0.29,
+        -0.70, 0.29, -1.0,
+        -0.15, 0.29, -1.0,
 
-        -0.15, 0.29,
-        -0.18, 0.25,
+        -0.15, 0.29, -1.0,
+        -0.18, 0.25, -1.0,
 
-        -0.15, 0.29,
-        -0.15, 0.20,
+        -0.15, 0.29, -1.0,
+        -0.15, 0.20, -1.0,
 //B : Bawah Tengah
     ];
 
@@ -128,12 +147,22 @@ function main() {
     //Vertex Shaders
     var vertexShaderCode3D1 = 
     `
-        attribute vec2 ThreeD1Position;
+        attribute vec3 ThreeD1Position;
         void main() {
             float x = ThreeD1Position.x;
             float y = ThreeD1Position.y;
+            float z = ThreeD1Position.z;
             gl_PointSize = 10.0;
-            gl_Position = vec4(x, y, 0.0, 1.0);
+            mat4 projectionMatrix = mat4(-0.7247, 0.0, 0.0, 0.0,
+                0.0, -0.7247, 0.0, 0.0,
+                0.0, 0.0, 1.22, -1,
+                0.0, 0.0, 1.11, 0.0);
+            mat4 viewMatrix = mat4(7.5, 0.0, 0.0, 0.0,
+                0.0, 7.5, 0.0, 0.0,
+                0.0, 0.0, 7.5, 0.0,
+                0.0, 0.0, 0.0, 7.5);
+            gl_PointSize = 10.0;
+            gl_Position =  viewMatrix * projectionMatrix * vec4(x, y, z, 1.0);
             
         }
         `;
@@ -145,7 +174,7 @@ function main() {
     var fragmentShaderCode3D1 = `
         void main() {
             precision mediump float;
-            float r = 1.0;
+            float r = 5.0;
             float g = 0.0;
             float b = 1.0;
             float a = 1.0;
@@ -168,7 +197,7 @@ function main() {
     //untuk setiap verteks yang sedang diproses
 
     var ThreeD1Position = gl.getAttribLocation(shaderProgram3D1, "ThreeD1Position");
-    gl.vertexAttribPointer(ThreeD1Position, 2, gl.FLOAT, false, 0, 0);
+    gl.vertexAttribPointer(ThreeD1Position, 3, gl.FLOAT, false, 0, 0);
     //                      index   dimensi              warna
     gl.enableVertexAttribArray(ThreeD1Position);
 
@@ -178,20 +207,20 @@ function main() {
 //-----------------------ANGKA KEDUA-----------------------------//
 
     var vertices2 = [ 
-        0.15, 0.75, //A : Kanan atas
-        0.75, 0.75,
-        0.75, 0.50,
-        0.72, 0.45,
-        0.20, 0.45,
-        0.20, 0.25,
-        0.72, 0.25,
-        0.75, 0.20,
-        0.15, 0.20,
-        0.15, 0.45,
-        0.18, 0.50,
-        0.70, 0.50,
-        0.70, 0.70,
-        0.18, 0.70
+        0.15, 0.75, -1.0, //A : Kanan atas
+        0.75, 0.75, -1.0,
+        0.75, 0.50, -1.0,
+        0.72, 0.45, -1.0,
+        0.20, 0.45, -1.0,
+        0.20, 0.25, -1.0,
+        0.72, 0.25, -1.0,
+        0.75, 0.20, -1.0,
+        0.15, 0.20, -1.0,
+        0.15, 0.45, -1.0,
+        0.18, 0.50, -1.0,
+        0.70, 0.50, -1.0,
+        0.70, 0.70, -1.0,
+        0.18, 0.70, -1.0
     ];
 
     var buffer = gl.createBuffer(); 
@@ -202,12 +231,21 @@ function main() {
     //Vertex Shaders
     var vertexShaderCode2 = 
     `
-        attribute vec2 bPosition;
+        attribute vec3 bPosition;
         void main() {
             float x = bPosition.x;
             float y = bPosition.y;
+            float z = bPosition.z;
             gl_PointSize = 10.0;
-            gl_Position = vec4(x, y, 0.0, 1.0);
+            mat4 projectionMatrix = mat4(-0.7247, 0.0, 0.0, 0.0,
+                0.0, -0.7247, 0.0, 0.0,
+                0.0, 0.0, 1.22, -1,
+                0.0, 0.0, 1.11, 0.0);
+            mat4 viewMatrix = mat4(7.5, 0.0, 0.0, 0.0,
+                0.0, 7.5, 0.0, 0.0,
+                0.0, 0.0, 7.5, 0.0,
+                0.0, 0.0, 0.0, 7.5);
+            gl_Position = projectionMatrix * viewMatrix * vec4(x, y, z, 1.0);
             
         }
         `;
@@ -219,7 +257,7 @@ function main() {
     var fragmentShaderCode2 = `
         void main() {
             precision mediump float;
-            float r = 1.0;
+            float r = 5.0;
             float g = 0.0;
             float b = 1.0;
             float a = 10.0;
@@ -238,41 +276,41 @@ function main() {
     gl.useProgram(shaderProgram2);
 
     var bPosition = gl.getAttribLocation(shaderProgram2, "bPosition");
-    gl.vertexAttribPointer(bPosition, 2, gl.FLOAT, false, 0, 0);
+    gl.vertexAttribPointer(bPosition, 3, gl.FLOAT, false, 0, 0);
     gl.enableVertexAttribArray(bPosition);
     gl.drawArrays(gl.LINE_LOOP, 0, 14); 
 
     var vertices3D2 = [ 
 
-        0.15, 0.75,
-        0.18, 0.79,
+        0.15, 0.75, -1.0,
+        0.18, 0.79, -1.0,
 
-        0.18, 0.79,
-        0.78, 0.79,
+        0.18, 0.79, -1.0,
+        0.78, 0.79, -1.0,
 
-        0.78, 0.79,
-        0.75, 0.75,
+        0.78, 0.79, -1.0,
+        0.75, 0.75, -1.0,
 
-        0.78, 0.79,
-        0.78, 0.54,
+        0.78, 0.79, -1.0,
+        0.78, 0.54, -1.0,
 
-        0.78, 0.54,
-        0.75, 0.50,
+        0.78, 0.54, -1.0,
+        0.75, 0.50, -1.0,
 
-        0.70, 0.54,
-        0.21, 0.54,
+        0.70, 0.54, -1.0,
+        0.21, 0.54, -1.0,
 
-        0.21, 0.54,
-        0.18, 0.50,
+        0.21, 0.54, -1.0,
+        0.18, 0.50, -1.0,
 
-        0.20, 0.29,
-        0.75, 0.29,
+        0.20, 0.29, -1.0,
+        0.75, 0.29, -1.0,
 
-        0.75, 0.29,
-        0.72, 0.25,
+        0.75, 0.29, -1.0,
+        0.72, 0.25, -1.0,
 
-        0.75, 0.29,
-        0.75, 0.20
+        0.75, 0.29, -1.0,
+        0.75, 0.20, -1.0
     ];
 
     var buffer = gl.createBuffer(); 
@@ -283,12 +321,21 @@ function main() {
     //Vertex Shaders
     var vertexShaderCode3D2 = 
     `
-        attribute vec2 ThreeD2Position;
+        attribute vec3 ThreeD2Position;
         void main() {
             float x = ThreeD2Position.x;
             float y = ThreeD2Position.y;
+            float z = ThreeD2Position.z;
+            mat4 projectionMatrix = mat4(-0.7247, 0.0, 0.0, 0.0,
+                0.0, -0.7247, 0.0, 0.0,
+                0.0, 0.0, 1.22, -1,
+                0.0, 0.0, 1.11, 0.0);
+            mat4 viewMatrix = mat4(7.5, 0.0, 0.0, 0.0,
+                0.0, 7.5, 0.0, 0.0,
+                0.0, 0.0, 7.5, 0.0,
+                0.0, 0.0, 0.0, 7.5);
             gl_PointSize = 10.0;
-            gl_Position = vec4(x, y, 0.0, 1.0);
+            gl_Position = projectionMatrix * vec4(x, y, z, 1.0);
             
         }
         `;
@@ -319,17 +366,17 @@ function main() {
     gl.useProgram(shaderProgram3D2);
 
     var ThreeD2Position = gl.getAttribLocation(shaderProgram3D2, "ThreeD2Position");
-    gl.vertexAttribPointer(ThreeD2Position, 2, gl.FLOAT, false, 0, 0);
+    gl.vertexAttribPointer(ThreeD2Position, 3, gl.FLOAT, false, 0, 0);
     gl.enableVertexAttribArray(ThreeD2Position);
     gl.drawArrays(gl.LINES, 0, 20); 
 
     //-----------------------HURUF PERTAMA-----------------------------//
 
     var vertices3 = [ 
-        -0.75, -0.20, //A : Kanan atas
-        -0.70, -0.20,
-        -0.5915, -0.75,
-        -0.65, -0.75
+        -0.75, -0.20, -1.0, //A : Kanan atas
+        -0.70, -0.20, -1.0
+        -0.5915, -0.75, -1.0,
+        -0.65, -0.75, -1.0
     ];
 
     var buffer = gl.createBuffer(); 
@@ -340,12 +387,21 @@ function main() {
     //Vertex Shaders
     var vertexShaderCode3 = 
     `
-        attribute vec2 cPosition;
+        attribute vec3 cPosition;
         void main() {
             float x = cPosition.x;
             float y = cPosition.y;
+            float z = cPosition.z;
+            mat4 projectionMatrix = mat4(-0.7247, 0.0, 0.0, 0.0,
+                0.0, -0.7247, 0.0, 0.0,
+                0.0, 0.0, 1.22, -1,
+                0.0, 0.0, 1.11, 0.0);
+            mat4 viewMatrix = mat4(7.5, 0.0, 0.0, 0.0,
+                0.0, 7.5, 0.0, 0.0,
+                0.0, 0.0, 7.5, 0.0,
+                0.0, 0.0, 0.0, 7.5);
             gl_PointSize = 5.0;
-            gl_Position = vec4(x, y, 0.0, 1.0);
+            gl_Position = projectionMatrix * vec4(x, y, -1.0, 1.0);
             
         }
         `;
@@ -357,7 +413,7 @@ function main() {
     var fragmentShaderCode3 = `
         void main() {
             precision mediump float;
-            float r = 5.0;
+            float r = 0.0;
             float g = 1.0;
             float b = 0.0;
             float a = 10.0;
@@ -376,24 +432,24 @@ function main() {
     gl.useProgram(shaderProgram3);
 
     var cPosition = gl.getAttribLocation(shaderProgram3, "cPosition");
-    gl.vertexAttribPointer(cPosition, 2, gl.FLOAT, false, 0, 0);
+    gl.vertexAttribPointer(cPosition, 3, gl.FLOAT, false, 0, 0);
     gl.enableVertexAttribArray(cPosition);
     gl.drawArrays(gl.TRIANGLE_FAN, 0, 4); 
 
     var vertices4 = [ 
-        -0.75, -0.20, //A : Kanan atas
-        -0.70, -0.20,
-        -0.60, -0.70,
-        -0.50, -0.28,
-        -0.45, -0.28,
-        -0.35, -0.70,
-        -0.25, -0.20,
-        -0.20, -0.20,
-        -0.30, -0.75,
-        -0.40, -0.75,
-        -0.475, -0.40,
-        -0.55, -0.75,
-        -0.65, -0.75
+        -0.75, -0.20, -1.0, //A : Kanan atas
+        -0.70, -0.20, -1.0,
+        -0.60, -0.70, -1.0,
+        -0.50, -0.28, -1.0,
+        -0.45, -0.28, -1.0,
+        -0.35, -0.70, -1.0,
+        -0.25, -0.20, -1.0,
+        -0.20, -0.20, -1.0,
+        -0.30, -0.75, -1.0,
+        -0.40, -0.75, -1.0,
+        -0.475, -0.40, -1.0,
+        -0.55, -0.75, -1.0,
+        -0.65, -0.75, -1.0,
     ];
 
     var buffer = gl.createBuffer(); 
@@ -404,12 +460,21 @@ function main() {
     //Vertex Shaders
     var vertexShaderCode4 = 
     `
-        attribute vec2 dPosition;
+        attribute vec3 dPosition;
         void main() {
             float x = dPosition.x;
             float y = dPosition.y;
+            float z = dPosition.z;
+            mat4 projectionMatrix = mat4(-0.7247, 0.0, 0.0, 0.0,
+                0.0, -0.7247, 0.0, 0.0,
+                0.0, 0.0, 1.22, -1,
+                0.0, 0.0, 1.11, 0.0);
+            mat4 viewMatrix = mat4(7.5, 0.0, 0.0, 0.0,
+                0.0, 7.5, 0.0, 0.0,
+                0.0, 0.0, 7.5, 0.0,
+                0.0, 0.0, 0.0, 7.5);
             gl_PointSize = 5.0;
-            gl_Position = vec4(x, y, 0.0, 1.0);
+            gl_Position = projectionMatrix * vec4(x, y, z, 1.0);
             
         }
         `;
@@ -440,7 +505,7 @@ function main() {
     gl.useProgram(shaderProgram4);
 
     var dPosition = gl.getAttribLocation(shaderProgram4, "dPosition");
-    gl.vertexAttribPointer(dPosition, 2, gl.FLOAT, false, 0, 0);
+    gl.vertexAttribPointer(dPosition, 3, gl.FLOAT, false, 0, 0);
     gl.enableVertexAttribArray(dPosition);
     gl.drawArrays(gl.LINE_LOOP, 0, 13); 
 
@@ -1003,11 +1068,13 @@ for (var i=0.0; i<=360; i++) {
     var vert1 = [
       -0.27 * Math.sin(j) + 0.45,
       -0.31 * Math.cos(j) - 0.46,  
+      -1
     ];
 
     var vert2 = [
         0.45,
-        -0.45
+        -0.45,
+        -1
     ];
 
     hurufO = hurufO.concat(vert1);
@@ -1023,10 +1090,11 @@ gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(hurufO), gl.STATIC_DRAW);
 //Vertex Shaders
 var vertexShaderCodeHurufO = 
 `
-    attribute vec2 oPosition;
+    attribute vec3 oPosition;
     void main() {
         float x = oPosition.x;
         float y = oPosition.y;
+        float z = oPosition.z;
         gl_PointSize = 5.0;
         gl_Position = vec4(x, y, 0.0, 1.0);
         
@@ -1059,7 +1127,7 @@ gl.linkProgram(shaderProgramHurufO);
 gl.useProgram(shaderProgramHurufO);
 
 var oPosition = gl.getAttribLocation(shaderProgramHurufO, "oPosition");
-gl.vertexAttribPointer(oPosition, 2, gl.FLOAT, false, 0, 0);
+gl.vertexAttribPointer(oPosition, 3, gl.FLOAT, false, 0, 0);
 gl.enableVertexAttribArray(oPosition);
 gl.drawArrays(gl.TRIANGLE_STRIP, 0, n);
 
@@ -1129,6 +1197,21 @@ var pPosition = gl.getAttribLocation(shaderProgramHurufO2, "pPosition");
 gl.vertexAttribPointer(pPosition, 2, gl.FLOAT, false, 0, 0);
 gl.enableVertexAttribArray(pPosition);
 gl.drawArrays(gl.TRIANGLE_STRIP, 0, p);
+
+var m4 = {
+
+    perspective: function(fieldOfViewInRadians, aspect, near, far) {
+      ;
+      var rangeInv = 1.0 / (near - far);
+  
+      return [
+        f / aspect, 0, 0, 0,
+        0, f, 0, 0,
+        0, 0, (near + far) * rangeInv, -1,
+        0, 0, near * far * rangeInv * 2, 0
+      ];
+    },
+}
 }
 
 
