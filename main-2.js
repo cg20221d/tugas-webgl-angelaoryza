@@ -19,28 +19,7 @@ function main() {
       -0.20, 0.70, 0.0,      5.0, 1.0, 0.0,  //Index 12
       -0.72, 0.70, 0.0,      5.0, 1.0, 0.0,  //Index 13
     ];
-  
-    var indices2 = [
-        0,1,12,     0,13,12,
-        13,0,1,     13,12,1,
-        12,1,2,     12,11,2,
-        2,11,3,     2,3,11,
-        3,4,11,     4,10,11,
-        4,9,10,     4,10,9,
-        11,10,4,    11,3,4,
-        9,8,5,      9,4,5,
-        5,8,7,      5,6,7,
-        4,9,8,      4,5,8,
-        8,5,6,      8,7,6,
-        1,12,13,    1,0,13,
-        6,7,8,      6,5,8,
-        7,8,5,      7,6,5,
-        1,12,2,     1,2,12,
-        12,11,2,    12,2,11,
-        8,7,6,      8,5,6,
-        5,8,6,      5,7,6,
-    
-    ];
+
   
     var vertices23D = [
         -0.75, 0.75, 0.0,       5.0, 0.0, 1.0,//Index 0
@@ -74,22 +53,7 @@ function main() {
         -0.15, 0.20, 0.0,       5.0, 0.0, 1.0,//Index 19
     ];
   
-    var indices23D = [
-        0,1,3,      0,4,3,
-        0,2,3,      0,4,3,
-        0,3,4,      
-        1,0,3,      1,3,0,
-        4,3,7,      4,8,7,
-        4,7,8,      4,8,7,
-        4,3,7,      4,7,3,
-        7,6,8,      6,8,7,
-        10,11,13,   10,12,13,
-        14,17,18,   18,17,14,
-        17,19,18,   18,19,17,
-        14,18,17,   17,18,14,
-        18,14,17,   18,19,17,
-        19,18,14,    18,14,19,
-    ];
+
   
     var vertices21 = [
         0.15, 0.75, 0.0,       5.0, 0.0, 1.0, //A : Kanan atas
@@ -108,26 +72,6 @@ function main() {
         0.18, 0.70, 0.0,       5.0, 0.0, 1.0,
     ]
   
-    var indices21 = [
-        0,1,12,     0,13,12,
-        13,0,1,     13,12,1,
-        12,1,2,     12,11,2,
-        2,11,3,     2,3,11,
-        3,4,11,     4,10,11,
-        4,9,10,     4,10,9,
-        11,10,4,    11,3,4,
-        9,8,5,      9,4,5,
-        5,8,7,      5,6,7,
-        4,9,8,      4,5,8,
-        8,5,6,      8,7,6,
-        1,12,13,    1,0,13,
-        6,7,8,      6,5,8,
-        7,8,5,      7,6,5,
-        1,12,2,     1,2,12,
-        12,11,2,    12,2,11,
-        8,7,6,      8,5,6,
-        5,8,6,      5,7,6,
-    ];
 
     var vertices213D = [
         0.15, 0.75, 0.0,      5.0, 1.0, 0.0,       
@@ -161,204 +105,178 @@ function main() {
         0.75, 0.20, 0.0,      5.0, 1.0, 0.0, 
     ]
 
-    var indices213D = [
-        0,1,3,      0,4,3,
-        0,2,3,      0,4,3,
-        0,3,4,      
-        1,0,3,      1,3,0,
-        4,3,7,      4,8,7,
-        4,7,8,      4,8,7,
-        4,3,7,      4,7,3,
-        7,6,8,      6,8,7,
-        10,11,13,   10,12,13,
-        14,17,18,   18,17,14,
-        17,19,18,   18,19,17,
-        14,18,17,   17,18,14,
-        18,14,17,   18,19,17,
-        19,18,14,    18,14,19,
-        7,9,8,      8,9,7,
-      ];
-    
   
     var verticesW1 = [
-        -0.75, -0.20, 0.0,     0.0, 1.0, 5.0,       //A : Kanan atas
-        -0.70, -0.20, 0.0,     0.0, 1.0, 5.0,  
-        -0.5915, -0.75, 0.0,   0.0, 1.0, 5.0,  
-        -0.65, -0.75, 0.0,     0.0, 1.0, 5.0,  
-
-        -0.615, -0.75, 0.0,     0.0, 1.0, 5.0,       
-        -0.50, -0.28, 0.0,     0.0, 1.0, 5.0, 
-        -0.45, -0.28, 0.0,     0.0, 1.0, 5.0, 
-        -0.55, -0.75, 0.0,     0.0, 1.0, 5.0, 
-
-        -0.45, -0.28, 0.0,     0.0, 1.0, 5.0, 
-        -0.337, -0.75, 0.0,     0.0, 1.0, 5.0, 
-        -0.40, -0.75, 0.0,    0.0, 1.0, 5.0, 
-        -0.475, -0.40, 0.0,     0.0, 1.0, 5.0, 
-
-        -0.3585, -0.75, 0.0,     0.0, 1.0, 5.0, 
-        -0.25, -0.20, 0.0,     0.0, 1.0, 5.0, 
-        -0.20, -0.20, 0.0,     0.0, 1.0, 5.0, 
-        -0.30, -0.75, 0.0,     0.0, 1.0, 5.0, 
+        -0.75, -0.20,  0.0,      0.0, 1.0, 5.0,  //A : Kanan atas
+        -0.70, -0.20,  0.0,      0.0, 1.0, 5.0, 
+        -0.5915, -0.75,  0.0,    0.0, 1.0, 5.0, 
+        -0.65, -0.75,  0.0,      0.0, 1.0, 5.0, 
     ];
-  
-    var indicesW1 = [
-  
-      0, 1, 2,      1, 2, 3,
-      2, 1, 0,      0, 1, 3,
-      3, 0, 1,      1, 3, 2,
-    
-      4, 5, 6,      5, 6, 7,
-      4, 7, 6,      4, 3, 2,
-      4, 0, 1,      7, 4, 0,
-      7, 4, 5,      5, 7, 6,
-
-      
-      8, 9, 10,     9, 10, 11,
-      10, 9, 8,     8, 9, 11,
-      11, 8, 9,     11, 10, 9,
-      10, 8, 9,     15, 10, 14,
-
-      12, 13, 14,    13, 14, 15,
-    //   14, 15, 12,     12, 13, 14,
-    //   14, 15, 12,     13, 12, 15,
-    //   15, 12, 13,     13, 15, 14,
-    // 14, 13, 12,        15, 12, 13,
-    // 14, 15, 12,         13, 12, 15,
-    // 14, 13, 12,         15, 11, 13,
-    13, 15, 11,       13, 14, 15,
-    14, 11, 15,         15, 11, 14,
-
-    
-    //   15, 14, 13,     15, 12, 13,
-
-
-    //   14,13,11,     11,13,14,
-
-
-
-
-
-
-      
-      
-    ];
-  
     var verticesW2 = [
-        -0.75, -0.20, 0.0,      5.0, 0.0, 1.0,   
-        -0.72, -0.16, 0.0,      5.0, 0.0, 1.0,   
-        -0.67, -0.16, 0.0,      5.0, 0.0, 1.0,   
-        -0.70, -0.20, 0.0,      5.0, 0.0, 1.0,   
-
-        -0.70, -0.20, 0.0,      5.0, 0.0, 1.0,  
-        -0.67, -0.16, 0.0,      5.0, 0.0, 1.0,  
-        -0.585, -0.63, 0.0,      5.0, 0.0, 1.0,  
-        -0.60, -0.70, 0.0,      5.0, 0.0, 1.0,  
-
-        -0.50, -0.28, 0.0,      5.0, 0.0, 1.0, 
-        -0.47, -0.24, 0.0,      5.0, 0.0, 1.0, 
-        -0.42, -0.24, 0.0,      5.0, 0.0, 1.0, 
-        -0.45, -0.28,  0.0,      5.0, 0.0, 1.0, 
-
-        -0.42, -0.24,  0.0,      5.0, 0.0, 1.0, 
-        -0.45, -0.28,  0.0,      5.0, 0.0, 1.0, 
-        -0.35, -0.70,  0.0,      5.0, 0.0, 1.0, 
-        -0.3325, -0.63,  0.0,      5.0, 0.0, 1.0, 
-
-        -0.55, -0.75,  0.0,      5.0, 0.0, 1.0, 
-        -0.51, -0.75,  0.0,      5.0, 0.0, 1.0, 
-        -0.455, -0.49,  0.0,      5.0, 0.0, 1.0, 
-        -0.475, -0.40,  0.0,      5.0, 0.0, 1.0, 
-
-        -0.25, -0.20,  0.0,      5.0, 0.0, 1.0, 
-        -0.22, -0.16,  0.0,      5.0, 0.0, 1.0, 
-        -0.17, -0.16,  0.0,      5.0, 0.0, 1.0, 
-        -0.20, -0.20,  0.0,      5.0, 0.0, 1.0, 
-
-        -0.17, -0.16,  0.0,      5.0, 0.0, 1.0, 
-        -0.20, -0.20,  0.0,      5.0, 0.0, 1.0, 
-        -0.30, -0.75,  0.0,      5.0, 0.0, 1.0, 
-        -0.27, -0.71,  0.0,      5.0, 0.0, 1.0, 
+        -0.615, -0.75,  0.0,      0.0, 1.0, 5.0,
+        -0.50, -0.28,  0.0,      0.0, 1.0, 5.0,
+        -0.45, -0.28,  0.0,      0.0, 1.0, 5.0,
+        -0.55, -0.75,  0.0,      0.0, 1.0, 5.0,
     ];
-  
-    var indicesW2 = [
-      0, 1, 2,     0, 2, 3,
-      1,2,3,        2, 3, 0,
-
-
-
-      4, 5, 6,      5, 6, 7,
-    //   6, 7, 4,      7, 4, 5,
-
-      8, 9, 10,      9, 10, 11,
-      10, 11, 8,      11, 8, 9,
-
-      12, 13, 14,      13, 14, 15,
-      14, 15, 12,      15, 12, 13,
-      14, 12, 13,      13, 12, 15,
-
-
-    //   18, 19, 16,      19, 16, 17,
-     16, 17, 18,    17, 18, 19,
-     18, 19, 16,    19, 16, 17,
-     18, 17, 16,    
-
-      20, 21, 22,      21, 22, 23,
-      22, 23, 20,      23, 20, 21,
-
-      24, 25, 26,      25, 26, 27,
-      26, 27, 24,      27, 24, 25,
-
-      24, 25, 26,      25, 26, 27,
-      26, 27, 24,      27, 24, 25,
-
+    var verticesW3 = [
+        -0.45, -0.28,  0.0,      0.0, 1.0, 5.0,
+        -0.337, -0.75,  0.0,      0.0, 1.0, 5.0,
+        -0.40, -0.75,  0.0,      0.0, 1.0, 5.0,
+        -0.475, -0.40,  0.0,      0.0, 1.0, 5.0,
     ];
-  
-   
-  
+    var verticesW4 = [
+        -0.3585, -0.75,  0.0,      0.0, 1.0, 5.0,
+        -0.25, -0.20,  0.0,      0.0, 1.0, 5.0,
+        -0.20, -0.20,  0.0,      0.0, 1.0, 5.0,
+        -0.30, -0.75,  0.0,      0.0, 1.0, 5.0,
+    ];
+
+    var verticesW1B1 = [
+        -0.75, -0.20,   0.0,      0.0, 0.0, 5.0,
+        -0.72, -0.16,   0.0,      0.0, 0.0, 5.0,
+        -0.67, -0.16,   0.0,      0.0, 0.0, 5.0,
+        -0.70, -0.20,   0.0,      0.0, 0.0, 5.0,
+    ];
+    var verticesW1B2 = [
+        -0.70, -0.20,  0.0,       0.0, 0.0, 5.0,
+        -0.67, -0.16,  0.0,       0.0, 0.0, 5.0,
+        -0.585, -0.63,  0.0,       0.0, 0.0, 5.0,
+        -0.60, -0.70,  0.0,       0.0, 0.0, 5.0,
+    ];
+    var verticesW1B3 = [
+        -0.50, -0.28,  0.0,       0.0, 0.0, 5.0,
+        -0.47, -0.24,  0.0,       0.0, 0.0, 5.0,
+        -0.42, -0.24,  0.0,       0.0, 0.0, 5.0,
+        -0.45, -0.28,  0.0,       0.0, 0.0, 5.0,
+    ];
+    var verticesW1B4 = [
+        -0.42, -0.24,  0.0,       0.0, 0.0, 5.0,
+        -0.45, -0.28,  0.0,       0.0, 0.0, 5.0,
+        -0.35, -0.70,  0.0,       0.0, 0.0, 5.0,
+        -0.3325, -0.63,  0.0,       0.0, 0.0, 5.0,
+    ];
+    var verticesW1B5 = [
+        -0.55, -0.75,  0.0,       0.0, 0.0, 5.0,
+        -0.51, -0.75,  0.0,       0.0, 0.0, 5.0,
+        -0.455, -0.49,  0.0,       0.0, 0.0, 5.0,
+        -0.475, -0.40,  0.0,       0.0, 0.0, 5.0,
+    ];
+    var verticesW1B6 = [
+        -0.25, -0.20,  0.0,       0.0, 0.0, 5.0,
+        -0.22, -0.16,  0.0,       0.0, 0.0, 5.0,
+        -0.17, -0.16,  0.0,       0.0, 0.0, 5.0,
+        -0.20, -0.20,  0.0,       0.0, 0.0, 5.0,
+    ];
+    var verticesW1B7 = [
+        -0.17, -0.16,  0.0,       0.0, 0.0, 5.0,
+        -0.20, -0.20,  0.0,       0.0, 0.0, 5.0,
+        -0.30, -0.75,  0.0,       0.0, 0.0, 5.0,
+        -0.27, -0.71,  0.0,       0.0, 0.0, 5.0,
+    ];
+
+    var verticesO1 = [
+        0.5, -0.20,  1.0,       0.0, 0.0, 5.0,
+        1.0, -0.20,  1.0,       0.0, 0.0, 5.0,
+        1.0, -0.71,  1.0,       0.0, 0.0, 5.0,
+        0.5, -0.71,  1.0,       0.0, 0.0, 5.0,
+    ];
+
     var objects = [
       {
         name: '2',
         vertices: vertices2,
-        indices: indices2,
         length: 14,
-        type: gl.LINES,
+        type: gl.LINE_LOOP,
       },
       {
         name: '2',
         vertices: vertices23D,
-        indices: indices23D,
         length: 20,
         type: gl.LINES,
       },
       {
         name: '22',
         vertices: vertices21,
-        indices: indices21,
         length: 14,
-        type: gl.LINES,
+        type: gl.LINE_LOOP,
       },
       {
         name: '22',
         vertices: vertices213D,
-        indices: indices213D,
         length: 20,
         type: gl.LINES,
       },
-
       {
         name: 'W',
         vertices: verticesW1,
-        indices: indicesW1,
-        length: 16,
-        type: gl.TRIANGLE_STRIP,
+        length: 4,
+        type: gl.TRIANGLE_FAN,
       },
       {
         name: 'W',
         vertices: verticesW2,
-        indices: indicesW2,
-        length: 28,
-        type: gl.TRIANGLE_STRIP,
+        length: 4,
+        type: gl.TRIANGLE_FAN,
+      },
+      {
+        name: 'W',
+        vertices: verticesW3,
+        length: 4,
+        type: gl.TRIANGLE_FAN,
+      },
+      {
+        name: 'W',
+        vertices: verticesW4,
+        length: 4,
+        type: gl.TRIANGLE_FAN,
+      },
+      {
+        name: 'WB',
+        vertices: verticesW1B1,
+        length: 4,
+        type: gl.TRIANGLE_FAN,
+      },
+      {
+        name: 'WB',
+        vertices: verticesW1B2,
+        length: 4,
+        type: gl.TRIANGLE_FAN,
+      },
+      {
+        name: 'WB',
+        vertices: verticesW1B3,
+        length: 4,
+        type: gl.TRIANGLE_FAN,
+      },
+      {
+        name: 'WB',
+        vertices: verticesW1B4,
+        length: 4,
+        type: gl.TRIANGLE_FAN,
+      },
+      {
+        name: 'WB',
+        vertices: verticesW1B5,
+        length: 4,
+        type: gl.TRIANGLE_FAN,
+      },
+      {
+        name: 'WB',
+        vertices: verticesW1B6,
+        length: 4,
+        type: gl.TRIANGLE_FAN,
+      },
+      {
+        name: 'WB',
+        vertices: verticesW1B7,
+        length: 4,
+        type: gl.TRIANGLE_FAN,
+      },
+      {
+        name: '0',
+        vertices: verticesO1,
+        length: 4,
+        type: gl.TRIANGLE_FAN,
       },
 
     ]
@@ -409,7 +327,7 @@ function main() {
     var verticalDelta = 0.0;
     var scaleDelta = 0.0;
     var scaleSpeed = 0.022;
-    var freezeN = 0;
+    var freezeW = 0;
     var freezeO = 0;
     var thetaX = 0.0;
     var thetaY = 0.0;
@@ -433,36 +351,62 @@ function main() {
     
     mat4.perspective(perspective, Math.PI/3, 1.0, 0.5, 50);
   
-    function drawing (vertices, indices, start=0, end, glType=gl.LINE_LOOP) { 
-      const buffer = gl.createBuffer();
-      const indexBuffer = gl.createBuffer();
-  
-      // bind buffer
-      gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
-      gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW);
-      
-      gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, indexBuffer);
-      gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(indices), gl.STATIC_DRAW);
-      
-      const aPosition = gl.getAttribLocation(shaderProgram, 'aPosition');
-      const aColor = gl.getAttribLocation(shaderProgram, 'aColor');
-      // variable pointer ke GLSL
-      gl.vertexAttribPointer(aPosition, 3, gl.FLOAT, false, 
-          6 * Float32Array.BYTES_PER_ELEMENT, 
-          0 * Float32Array.BYTES_PER_ELEMENT
-      );
-      gl.enableVertexAttribArray(aPosition);
-      
-      // gl.drawArrays(glType, start, end);
-      
-      gl.vertexAttribPointer(aColor, 3, gl.FLOAT, false, 
-          6 * Float32Array.BYTES_PER_ELEMENT, 
-          3 * Float32Array.BYTES_PER_ELEMENT 
-          );
-      gl.enableVertexAttribArray(aColor);
-      
-      gl.drawElements(glType, indices.length - 11, gl.UNSIGNED_SHORT, 0);
-    }
+
+    function drawing_again (vertices, glType=gl.LINE_LOOP, length) { 
+        const buffer = gl.createBuffer();
+        const indexBuffer = gl.createBuffer();
+    
+        // bind buffer
+        gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW);
+        
+        
+        const aPosition = gl.getAttribLocation(shaderProgram, 'aPosition');
+        const aColor = gl.getAttribLocation(shaderProgram, 'aColor');
+        // variable pointer ke GLSL
+        gl.vertexAttribPointer(aPosition, 3, gl.FLOAT, false, 
+            6 * Float32Array.BYTES_PER_ELEMENT, 
+            0 * Float32Array.BYTES_PER_ELEMENT
+        );
+        gl.enableVertexAttribArray(aPosition);
+        
+        
+        gl.vertexAttribPointer(aColor, 3, gl.FLOAT, false, 
+            6 * Float32Array.BYTES_PER_ELEMENT, 
+            3 * Float32Array.BYTES_PER_ELEMENT 
+            );
+        gl.enableVertexAttribArray(aColor);
+        
+        gl.drawArrays(glType, 0, length);
+      }
+
+        function drawing_again (vertices, glType=gl.LINE_LOOP, length) { 
+        console.log(vertices);
+        const buffer = gl.createBuffer();
+    
+        // bind buffer
+        gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW);
+        
+        
+        const aPosition = gl.getAttribLocation(shaderProgram, 'aPosition');
+        const aColor = gl.getAttribLocation(shaderProgram, 'aColor');
+        // variable pointer ke GLSL
+        gl.vertexAttribPointer(aPosition, 3, gl.FLOAT, false, 
+            6 * Float32Array.BYTES_PER_ELEMENT, 
+            0 * Float32Array.BYTES_PER_ELEMENT
+        );
+        gl.enableVertexAttribArray(aPosition);
+        
+        
+        gl.vertexAttribPointer(aColor, 3, gl.FLOAT, false, 
+            6 * Float32Array.BYTES_PER_ELEMENT, 
+            3 * Float32Array.BYTES_PER_ELEMENT 
+            );
+        gl.enableVertexAttribArray(aColor);
+        
+        gl.drawArrays(glType, 0, length);
+      }
   
     function animate2(i) {
       var model = mat4.create();
@@ -479,7 +423,7 @@ function main() {
       gl.uniformMatrix4fv(uModel,false, model);
       gl.uniformMatrix4fv(uView, false, view);
       gl.uniformMatrix4fv(uProjection, false, perspective);
-      drawing(objects[i].vertices, objects[i].indices, 0, objects[i].length, objects[i].type);
+      drawing_again(objects[i].vertices, objects[i].type, objects[i].length);
     }
   
     function animate21(i) {
@@ -497,30 +441,47 @@ function main() {
       gl.uniformMatrix4fv(uModel,false, model);
       gl.uniformMatrix4fv(uView, false, view);
       gl.uniformMatrix4fv(uProjection, false, perspective);
-      drawing(objects[i].vertices, objects[i].indices, 0, objects[i].length, objects[i].type);
+      drawing_again(objects[i].vertices, objects[i].type, objects[i].length);
     }
   
     function onKeyPress(event) {
-      if (event.keyCode == 37) { // left arrow
-        freezeN = 1;
-      } else if (event.keyCode == 39) { // right arrow
-        freezeN = 2;
-      } else if (event.keyCode == 38) { // up arrow
-        freezeA = 1;
-      } else if (event.keyCode == 40) { // down arrow
-        freezeA = 2;
+      if (event.keyCode == 38) { // left arrow
+        freezeO = 1;
+      } else if(event.keyCode == 40) { // right arrow
+        freezeO = 2;
+      } if (event.keyCode == 37) { // up arrow
+        freezeW = 1;
+      } else if (event.keyCode == 39) { // down arrow
+        freezeW = 2;
       }
     }
   
     document.addEventListener("keydown", onKeyPress, false);
   
+    function animateO(i)  {
+        var modelx = mat4.create();
+        mat4.rotateX(modelx, modelx, thetaX);
+        if (freezeO == 1) {
+          thetaX -= 0.01;
+        } else if (freezeO == 2) {
+          thetaX += 0.01;
+        }
+    
+        var uModel = gl.getUniformLocation(shaderProgram, "uModel");
+        var uView = gl.getUniformLocation(shaderProgram, "uView");
+        var uProjection = gl.getUniformLocation(shaderProgram, "uProjection");
+        gl.uniformMatrix4fv(uModel, false, modelx);
+        gl.uniformMatrix4fv(uView, false, view);
+        gl.uniformMatrix4fv(uProjection, false, perspective);
+        drawing_again(objects[i].vertices, objects[i].type, objects[i].length);
+      }
     function animateW(i)  {
       var modely = mat4.create();
       mat4.rotateY(modely, modely, thetaY);
   
-      if (freezeN == 1) {
+      if (freezeW == 1) {
         thetaY -= 0.01;
-      } else if (freezeN == 2) {
+      } else if (freezeW == 2) {
         thetaY += 0.01;
       }
   
@@ -530,8 +491,10 @@ function main() {
       gl.uniformMatrix4fv(uModel, false, modely);
       gl.uniformMatrix4fv(uView, false, view);
       gl.uniformMatrix4fv(uProjection, false, perspective);
-      drawing(objects[i].vertices, objects[i].indices, 0, objects[i].length, objects[i].type);
+      drawing_again(objects[i].vertices, objects[i].type, objects[i].length);
     }
+
+ 
   
 
     function onMouseClick(event) {
@@ -595,6 +558,16 @@ function main() {
         animate21(3);
         animateW(4);
         animateW(5);
+        animateW(6);
+        animateW(7);
+        animateW(8);
+        animateW(9);
+        animateW(10);
+        animateW(11);
+        animateW(12);
+        animateW(13);
+        animateW(14);
+        animateO(15);
 
         requestAnimationFrame(render);
     }
