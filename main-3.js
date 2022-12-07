@@ -622,8 +622,8 @@ function main() {
         gl.uniformMatrix4fv(uView, false, view);
         gl.uniformMatrix4fv(uProjection, false, perspective);
         // gl.drawElements(gl.LINE_LOOP, indices.length, gl.UNSIGNED_SHORT, 0);
-        animate2(0);
-        animate2(1);
+        // animate2(0);
+        // animate2(1);
         animate21(2);
         animate21(3);
         animateW(4);
@@ -637,7 +637,7 @@ function main() {
         animateW(12);
         animateW(13);
         animateW(14);
-        animateO(15);
+        // animateO(15);
         animate_cube(16);
 
         requestAnimationFrame(render);
