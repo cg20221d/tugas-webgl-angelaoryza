@@ -188,30 +188,30 @@ function main() {
        0.2,  0.2, -0.2,     0.0, 0.0, 5.0,     // Index:  2
       -0.2,  0.2, -0.2,     0.0, 0.0, 5.0,     // Index:  3
       // Face B       // Yellow
-      -0.2, -0.2,  0.2,     0.0, 0.0, 5.0,    // Index:  4
-       0.2, -0.2,  0.2,     0.0, 0.0, 5.0,    // Index:  5
-       0.2,  0.2,  0.2,     0.0, 0.0, 5.0,    // Index:  6
-      -0.2,  0.2,  0.2,     0.0, 0.0, 5.0,    // Index:  7
+      -0.2, -0.2,  0.2,     1.0, 1.0, 1.0,    // Index:  4
+       0.2, -0.2,  0.2,     1.0, 1.0, 1.0,    // Index:  5
+       0.2,  0.2,  0.2,     1.0, 1.0, 1.0,    // Index:  6
+      -0.2,  0.2,  0.2,     1.0, 1.0, 1.0,    // Index:  7
       // Face C       // Green
       -0.2, -0.2, -0.2,     0.0, 0.0, 5.0,     // Index:  8
       -0.2,  0.2, -0.2,     0.0, 0.0, 5.0,     // Index:  9
       -0.2,  0.2,  0.2,     0.0, 0.0, 5.0,      // Index: 10
       -0.2, -0.2,  0.2,     0.0, 0.0, 5.0,      // Index: 11
       // Face D       // Blue
-      0.2, -0.2, -0.2,     0.0, 0.0, 5.0,     // Index: 12
-      0.2,  0.2, -0.2,     0.0, 0.0, 5.0,     // Index: 13
-      0.2,  0.2,  0.2,     0.0, 0.0, 5.0,     // Index: 14
-      0.2, -0.2,  0.2,     0.0, 0.0, 5.0,     // Index: 15
+      0.2, -0.2, -0.2,     1.0, 1.0, 1.0,     // Index: 12
+      0.2,  0.2, -0.2,     1.0, 1.0, 1.0,     // Index: 13
+      0.2,  0.2,  0.2,     1.0, 1.0, 1.0,     // Index: 14
+      0.2, -0.2,  0.2,     1.0, 1.0, 1.0,     // Index: 15
       // Face E       // Orange
       -0.2, -0.2, -0.2,     0.0, 0.0, 5.0,   // Index: 16
       -0.2, -0.2,  0.2,     0.0, 0.0, 5.0,   // Index: 17
       0.2, -0.2,  0.2,     0.0, 0.0, 5.0,   // Index: 18
       0.2, -0.2, -0.2,     0.0, 0.0, 5.0,   // Index: 19
       // Face F       // White
-      -0.2,  0.2, -0.2,    0.0, 0.0, 5.0,    // Index: 20
-      -0.2,  0.2,  0.2,    0.0, 0.0, 5.0,    // Index: 21
-      0.2,  0.2,  0.2,    0.0, 0.0, 5.0,    // Index: 22
-      0.2,  0.2, -0.2,    0.0, 0.0, 5.0,     // Index: 23
+      -0.2,  0.2, -0.2,    1.0, 1.0, 1.0,    // Index: 20
+      -0.2,  0.2,  0.2,    1.0, 1.0, 1.0,    // Index: 21
+      0.2,  0.2,  0.2,    1.0, 1.0, 1.0,    // Index: 22
+      0.2,  0.2, -0.2,    1.0, 1.0, 1.0,     // Index: 23
   ];
 
 
@@ -370,6 +370,8 @@ function main() {
     var scaleSpeed = 0.022;
     var freezeW = 0;
     var freezeO = 0;
+    var moveX = 0.0;
+    var moveZ = 0.0;
     var thetaX = 0.0;
     var thetaY = 0.0;
   
@@ -495,6 +497,17 @@ function main() {
       } else if (event.keyCode == 39) { // down arrow
         freezeW = 2;
       }
+      if (event.keyCode == 73) { // i / arrow kiri
+        moveZ -= 0.2;
+      } else if (event.keyCode == 75) { // k / arrow kanan
+        moveZ += 0.2;
+      }
+  
+      if (event.keyCode == 74) { // j / arrow kiri
+        moveX -= 0.2;
+      } else if (event.keyCode == 76) { // l / arrow kanan
+        moveX += 0.2;
+      }
     }
   
     document.addEventListener("keydown", onKeyPress, false);
@@ -516,6 +529,22 @@ function main() {
         gl.uniformMatrix4fv(uProjection, false, perspective);
         drawing_again(objects[i].vertices, objects[i].type, objects[i].length);
       }
+
+      function animate_cube(i)  {
+        var model = mat4.create();
+
+        mat4.translate(model, model, [moveX, 0.0, moveZ]);
+    
+        var uModel = gl.getUniformLocation(shaderProgram, "uModel");
+        var uView = gl.getUniformLocation(shaderProgram, "uView");
+        var uProjection = gl.getUniformLocation(shaderProgram, "uProjection");
+    
+        gl.uniformMatrix4fv(uModel,false, model);
+        gl.uniformMatrix4fv(uView, false, view);
+        gl.uniformMatrix4fv(uProjection, false, perspective);
+        drawing_again(objects[i].vertices, objects[i].type, objects[i].length);
+      }
+
     function animateW(i)  {
       var modely = mat4.create();
       mat4.rotateY(modely, modely, thetaY);
@@ -609,7 +638,7 @@ function main() {
         animateW(13);
         animateW(14);
         animateO(15);
-        animateO(16);
+        animate_cube(16);
 
         requestAnimationFrame(render);
     }
