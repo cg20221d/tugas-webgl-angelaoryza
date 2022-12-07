@@ -344,8 +344,12 @@ function main() {
     var fragmentShaderCode = `
     precision mediump float;
     varying vec3 vColor;
+    uniform vec3 uAmbientConstant;      // merepresentasikan warna sumber cahaya
+    uniform float uAmbientIntensity;    // merepresentasikan intensitas cahaya sekitar
     void main() {
-        gl_FragColor = vec4(vColor, 1.0);
+        vec3 ambient = uAmbientConstant * uAmbientIntensity;
+        vec3 phong = ambient;
+        gl_FragColor = vec4(phong * vColor, 1.0);
     }
     `;
     var fragmentShaderObject = gl.createShader(gl.FRAGMENT_SHADER);
@@ -395,35 +399,7 @@ function main() {
     mat4.perspective(perspective, Math.PI/3, 1.0, 0.5, 50);
   
 
-    function drawing_again (vertices, glType=gl.LINE_LOOP, length) { 
-        const buffer = gl.createBuffer();
-        const indexBuffer = gl.createBuffer();
-    
-        // bind buffer
-        gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
-        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW);
-        
-        
-        const aPosition = gl.getAttribLocation(shaderProgram, 'aPosition');
-        const aColor = gl.getAttribLocation(shaderProgram, 'aColor');
-        // variable pointer ke GLSL
-        gl.vertexAttribPointer(aPosition, 3, gl.FLOAT, false, 
-            6 * Float32Array.BYTES_PER_ELEMENT, 
-            0 * Float32Array.BYTES_PER_ELEMENT
-        );
-        gl.enableVertexAttribArray(aPosition);
-        
-        
-        gl.vertexAttribPointer(aColor, 3, gl.FLOAT, false, 
-            6 * Float32Array.BYTES_PER_ELEMENT, 
-            3 * Float32Array.BYTES_PER_ELEMENT 
-            );
-        gl.enableVertexAttribArray(aColor);
-        
-        gl.drawArrays(glType, 0, length);
-      }
-
-        function drawing_again (vertices, glType=gl.LINE_LOOP, length) { 
+        function drawing_again (vertices, glType, length) { 
         console.log(vertices);
         const buffer = gl.createBuffer();
     
@@ -441,6 +417,10 @@ function main() {
         );
         gl.enableVertexAttribArray(aPosition);
         
+        var uAmbientConstant = gl.getUniformLocation(shaderProgram, "uAmbientConstant");
+        var uAmbientIntensity = gl.getUniformLocation(shaderProgram, "uAmbientIntensity");
+        gl.uniform3fv(uAmbientConstant, [1.0, 1.0, 1.0]);   // warna sumber cahaya: putih
+        gl.uniform1f(uAmbientIntensity, 0.322);               // intensitas cahaya: 40%
         
         gl.vertexAttribPointer(aColor, 3, gl.FLOAT, false, 
             6 * Float32Array.BYTES_PER_ELEMENT, 
